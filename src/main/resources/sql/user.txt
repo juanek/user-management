@@ -1,0 +1,165 @@
+I want to store information about users, roles and permissions in a relational table MySQL.
+ Can you suggest a structure?
+
+Can you write de CRUD queries for the tables users?
+
+Give a java class that represent this tables relations.
+
+
+
+
+public class User {
+    private int id;
+    private String username;
+    private String password;
+    private String email;
+    private List<Role> roles;
+
+    // constructor, getters and setters
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+    }
+}
+
+public class Role {
+    private int id;
+    private String name;
+    private String description;
+    private List<Permission> permissions;
+
+    // constructor, getters and setters
+
+    public void addPermission(Permission permission) {
+        permissions.add(permission);
+    }
+
+    public void removePermission(Permission permission) {
+        permissions.remove(permission);
+    }
+}
+
+public class Permission {
+    private int id;
+    private String name;
+    private String description;
+
+    // constructor, getters and setters
+}
+
+
+-------------------
+Write a Dokerfile file for configure MySQL 5.7 server a then save this structure.
+
+
+
+--------------
+https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-spring-config.html
+
+-------------------------------
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+public interface UserMapper {
+    @Insert("INSERT INTO users (username, password, email) VALUES (#{username}, #{password}, #{email})")
+    void insert(User user);
+
+    @Select("SELECT * FROM users WHERE id = #{id}")
+    User findById(int id);
+
+    @Select("SELECT * FROM users")
+    List<User> findAll();
+
+    @Update("UPDATE users SET username = #{username}, password = #{password}, email = #{email} WHERE id = #{id}")
+    void update(User user);
+
+    @Delete("DELETE FROM users WHERE id = #{id}")
+    void delete(int id);
+}
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+public interface RoleMapper {
+    @Insert("INSERT INTO roles (name, description) VALUES (#{name}, #{description})")
+    void insert(Role role);
+
+    @Select("SELECT * FROM roles WHERE id = #{id}")
+    Role findById(int id);
+
+    @Select("SELECT * FROM roles")
+    List<Role> findAll();
+
+    @Update("UPDATE roles SET name = #{name}, description = #{description} WHERE id = #{id}")
+    void update(Role role);
+
+    @Delete("DELETE FROM roles WHERE id = #{id}")
+    void delete(int id);
+}
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+public interface PermissionMapper {
+    @Insert("INSERT INTO permissions (name, description) VALUES (#{name}, #{description})")
+    void insert(Permission permission);
+
+    @Select("SELECT * FROM permissions WHERE id = #{id}")
+    Permission findById(int id);
+
+    @Select("SELECT * FROM permissions")
+    List<Permission> findAll();
+
+    @Update("UPDATE permissions SET name = #{name}, description = #{description} WHERE id = #{id}")
+    void update(Permission permission);
+
+    @Delete("DELETE FROM permissions WHERE id = #{id}")
+    void delete(int id);
+}
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+
+public interface UserRoleMapper {
+    @Insert("INSERT INTO user_roles (user_id, role_id) VALUES (#{userId}, #{roleId})")
+    void insert(UserRole userRole);
+
+    @Select("SELECT r.* FROM roles r INNER JOIN user_roles ur ON r.id = ur.role_id WHERE ur.user_id = #{userId}")
+    List<Role> findRolesByUserId(int userId);
+
+    @Select("SELECT u.* FROM users u INNER JOIN user_roles ur ON u.id = ur.user_id WHERE ur.role_id = #{roleId}")
+    List<User> findUsersByRoleId(int roleId);
+}
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+
+public interface RolePermissionMapper {
+    @Insert("INSERT INTO role_permissions (role_id, permission_id) VALUES (#{roleId}, #{permissionId})")
+    void insert(RolePermission rolePermission);
+
+    @Select("SELECT p.* FROM permissions p INNER JOIN role_permissions rp ON p.id = rp.permission_id WHERE rp.role_id = #{roleId}")
+    List<Permission> findPermissionsByRoleId(int roleId);
+
+    @Select("SELECT r.* FROM roles r INNER JOIN role_permissions rp ON r.id = rp.role_id WHERE rp.permission_id = #{permissionId}")
+    List<Role>
