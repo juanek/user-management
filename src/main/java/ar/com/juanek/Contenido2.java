@@ -11,10 +11,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 
 public class Contenido2 extends Panel {
-    public Contenido2(String id, IModel<SmartModel> model) {
+    public Contenido2(String id, IModel<UserModel> model) {
         super(id, model);
 
-        Form<SmartModel> form = new Form<>("form",model);
+        Form<UserModel> form = new Form<>("form",model);
         form.add(new TextField<String>("nombre",new PropertyModel<>(model,"nombre")));
         form.add(new AjaxButton("aceptar") {
             @Override

@@ -1,6 +1,6 @@
 package ar.com.juanek.resources;
 
-import ar.com.juanek.SmartApplication;
+import ar.com.juanek.UserApplication;
 import ar.com.juanek.block.BlockUIResourceReference;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -18,7 +18,7 @@ public class EscritorioJS extends JavaScriptResourceReference {
     @Override
     public List<HeaderItem> getDependencies() {
         List<HeaderItem> items = new ArrayList<>();
-        items.add(JavaScriptHeaderItem.forReference(SmartApplication.get().getJavaScriptLibrarySettings().getJQueryReference()));
+        items.add(JavaScriptHeaderItem.forReference(UserApplication.get().getJavaScriptLibrarySettings().getJQueryReference()));
         items.add(JavaScriptHeaderItem.forReference(new BoostrapJS()));
         items.add(JavaScriptHeaderItem.forReference(new BlockUIResourceReference()));
         return items;

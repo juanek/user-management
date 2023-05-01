@@ -1,5 +1,6 @@
 package ar.com.juanek;
 
+import ar.com.juanek.dao.RolesMapper;
 import ar.com.juanek.dao.UserMapper;
 import ar.com.juanek.security.Login;
 import ar.com.juanek.util.MetaUtil;
@@ -19,23 +20,28 @@ import org.wicketstuff.shiro.ShiroConstraint;
 import org.wicketstuff.shiro.annotation.ShiroSecurityConstraint;
 
 @ShiroSecurityConstraint(constraint = ShiroConstraint.IsAuthenticated,loginPage = Login.class)
-public class Marco extends WebPage {
+public class Base extends WebPage {
 
-    private static final Logger log = LoggerFactory.getLogger( Marco.class );
+    private static final Logger log = LoggerFactory.getLogger( Base.class );
 
     @SpringBean
     UserMapper userMapper;
-    private SmartModel smartModel;
 
-    public Marco(PageParameters parameters) {
+    @SpringBean
+    RolesMapper rolesMapper;
+
+    private UserModel smartModel;
+
+    public Base(PageParameters parameters) {
         super(parameters);
         log.info("userMapper {}",userMapper);
         log.info("userMapper {}",userMapper.getUser("usuario1"));
-        smartModel = new SmartModel();
+        log.info("roles {}",rolesMapper.findAll());
+        smartModel = new UserModel();
         smartModel.setNombre("Pedro");
 
         add(new Escritorio("escritorio",
-                new PropertyModel<SmartModel>(this, "smartModel")));
+                new PropertyModel<UserModel>(this, "smartModel")));
     }
 
     @Override

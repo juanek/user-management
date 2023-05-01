@@ -10,7 +10,7 @@ import org.apache.wicket.model.IModel;
 import org.wicketstuff.shiro.page.LogoutPage;
 
 public class BarraEstado extends Panel {
-    public BarraEstado(String id, IModel<SmartModel> model) {
+    public BarraEstado(String id, IModel<UserModel> model) {
         super(id, model);
 
 
@@ -19,8 +19,8 @@ public class BarraEstado extends Panel {
             @Override
             public void onClick(AjaxRequestTarget ajaxRequestTarget) {
                 System.out.println("link1");
-                System.out.println("model AjaxLink1 "+((SmartModel)BarraEstado.this.getDefaultModel().getObject()).getNombre());
-                SmartModel smartModel = ((SmartModel)BarraEstado.this.getDefaultModel().getObject());
+                System.out.println("model AjaxLink1 "+((UserModel)BarraEstado.this.getDefaultModel().getObject()).getNombre());
+                UserModel smartModel = ((UserModel)BarraEstado.this.getDefaultModel().getObject());
                 smartModel.setNombre("Maria");
                 //BarraEstado.this.modelChanged();
 
@@ -33,8 +33,8 @@ public class BarraEstado extends Panel {
             @Override
             public void onClick(AjaxRequestTarget ajaxRequestTarget) {
                 System.out.println("link2");
-                System.out.println("model AjaxLink2 "+((SmartModel)BarraEstado.this.getDefaultModel().getObject()).getNombre());
-                SmartModel smartModel = ((SmartModel)BarraEstado.this.getDefaultModel().getObject());
+                System.out.println("model AjaxLink2 "+((UserModel)BarraEstado.this.getDefaultModel().getObject()).getNombre());
+                UserModel smartModel = ((UserModel)BarraEstado.this.getDefaultModel().getObject());
                 send(BarraEstado.this.getParent(), Broadcast.EXACT,new MenuEvent(ajaxRequestTarget, Contenido2.class));
             }
         });

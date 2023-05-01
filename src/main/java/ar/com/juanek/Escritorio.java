@@ -23,7 +23,7 @@ public class Escritorio extends Panel {
 
 
 
-    public Escritorio(String id, IModel<SmartModel> model) {
+    public Escritorio(String id, IModel<UserModel> model) {
         super(id, model);
 
         add(new BarraEstado("barra-estado", model));

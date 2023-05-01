@@ -2,7 +2,7 @@ package ar.com.juanek;
 
 import java.io.Serializable;
 
-public class SmartModel implements Serializable {
+public class UserModel implements Serializable {
 
     private String nombre;
 
@@ -16,7 +16,7 @@ public class SmartModel implements Serializable {
 
     @Override
     public String toString() {
-        return "SmartModel{" +
+        return "UserModel{" +
                 "nombre='" + nombre + '\'' +
                 '}';
     }

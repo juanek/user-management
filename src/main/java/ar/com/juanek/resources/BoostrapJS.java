@@ -1,6 +1,6 @@
 package ar.com.juanek.resources;
 
-import ar.com.juanek.SmartApplication;
+import ar.com.juanek.UserApplication;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -16,7 +16,7 @@ public class BoostrapJS extends JavaScriptResourceReference {
     @Override
     public List<HeaderItem> getDependencies() {
         List<HeaderItem> items = new ArrayList<>();
-        items.add(JavaScriptHeaderItem.forReference(SmartApplication.get().getJavaScriptLibrarySettings().getJQueryReference()));
+        items.add(JavaScriptHeaderItem.forReference(UserApplication.get().getJavaScriptLibrarySettings().getJQueryReference()));
         return items;
     }
 }

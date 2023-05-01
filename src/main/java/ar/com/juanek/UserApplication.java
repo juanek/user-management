@@ -15,13 +15,13 @@ import org.wicketstuff.shiro.annotation.AnnotationsShiroAuthorizationStrategy;
 import org.wicketstuff.shiro.authz.ShiroUnauthorizedComponentListener;
 import org.wicketstuff.shiro.page.LogoutPage;
 @Component
-public class SmartApplication extends WebApplication {
+public class UserApplication extends WebApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(SmartApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(UserApplication.class);
 
     @Override
     public Class<? extends Page> getHomePage() {
-        return Marco.class;
+        return Base.class;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SmartApplication extends WebApplication {
         mountPage("/login", Login.class);
         mountPage("/logout", LogoutPage.class);
         //la monté en app para evitar faviicon.ico al comienzo de la url
-        mountPage("/app", Marco.class);
+        mountPage("/app", Base.class);
         mountPage("/aut", Autorizada.class);
 
 

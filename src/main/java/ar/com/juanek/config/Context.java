@@ -29,33 +29,16 @@ public class Context {
     public DataSource getDataSource() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        //org.hsqldb.jdbcDriver
         dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3406/usersdb");
-        //jdbc:hsqldb:mem:shiro-spring
         dataSource.setUsername("myuser");
         dataSource.setPassword("myuser");
         return dataSource;
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-//        dataSource.setUrl("jdbc:hsqldb:mem:shiro-spring");
-//        dataSource.setUsername("sa");
-//
-//        return dataSource;
-////        return DataSourceBuilder.create()
-//                .driverClassName("com.mysql.jdbc.Driver")
-//                .url(mysqlUrl)
-//                .username(mysqlUser)
-//                .password(mysqlPassword)
-//                .type(HikariDataSource.class)
-//                .build();
     }
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        //factoryBean.setConfigLocation(new ClassPathResource("/mybatis-config.xml"));
-       // factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mysqlmapper/**/*Mapper.xml"));
         return factoryBean.getObject();
     }
 
