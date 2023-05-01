@@ -1,2 +1,2 @@
-# user-management-
+# user-management
 A user management project
