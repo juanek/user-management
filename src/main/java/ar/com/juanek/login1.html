@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous"
+    />
+
+    <!-- Boxicons CDN Link -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      data-require="Font_Awesome@4.7.0"
+      data-semver="4.7.0"
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        form i {
+            
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="back">
+
+
+        <div class="div-center">
+      
+      
+          <div class="content">
+      
+          
+
+      
+            <h3>Login</h3>
+            <hr />
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+              </div>
+              
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="password" class="form-control" id="password" aria-label="Amount (to the nearest dollar)" placeholder="Password">
+                  <span class="input-group-addon" onclick="password_show_hide();">
+                    <i class="fa fa-eye" id="show_eye"></i>
+                    <i class="fa fa-eye-slash" id="hide_eye" style="display: none;"></i>
+                    
+                                   </span>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+              <hr />
+              <button type="button" class="btn btn-link">Signup</button>
+              <button type="button" class="btn btn-link">Reset Password</button>
+      
+            </form>
+      
+          </div>
+      
+      
+          </span>
+        </div>
+
+        <script>
+            function password_show_hide() {
+        var x = document.getElementById("password");
+        var show_eye = document.getElementById("show_eye");
+        var hide_eye = document.getElementById("hide_eye");
+        hide_eye.classList.remove("d-none");
+        if (x.type === "password") {
+          x.type = "text";
+          show_eye.style.display = "none";
+          hide_eye.style.display = "block";
+        } else {
+          x.type = "password";
+          show_eye.style.display = "block";
+          hide_eye.style.display = "none";
+        }
+      }
+        </script>
+  </body>
+</html>
