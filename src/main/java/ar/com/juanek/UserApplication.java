@@ -27,6 +27,7 @@ public class UserApplication extends WebApplication {
     @Override
     protected void init() {
         super.init();
+        getCspSettings().blocking().disabled();
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
         getMarkupSettings().setStripComments(true);
         getMarkupSettings().setStripWicketTags(true);
