@@ -110,7 +110,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- servlet api -->
+        <!-- servlet api hasta 3.0 soportado por caucho resin -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -242,18 +242,13 @@
             </testResource>
         </testResources>
         <plugins>
+
             <plugin>
-                <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.10.1</version>
+                <inherited>true</inherited>
                 <configuration>
-                    <!--
-                        jdk 17 error con shiro
-                         sdk use java 11.0.19-tem
-                        para mvn package
-                        https://stackoverflow.com/questions/70625889/unable-to-load-the-mojo-war-in-the-plugin
-                    -->
                     <source>11</source>
                     <target>11</target>
                     <encoding>UTF-8</encoding>
@@ -262,9 +257,14 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty9.version}</version>
+                <version>9.4.51.v20230217</version>
                 <configuration>
                     <systemProperties>
                         <systemProperty>
@@ -272,11 +272,10 @@
                             <value>${project.build.directory}/test-classes</value>
                         </systemProperty>
                     </systemProperties>
-                    <jettyXml>
-                        ${project.basedir}/src/test/jetty/jetty.xml,${project.basedir}/src/test/jetty/jetty-ssl.xml,${project.basedir}/src/test/jetty/jetty-http.xml,${project.basedir}/src/test/jetty/jetty-https.xml
-                    </jettyXml>
+                    <jettyXml>${project.basedir}/src/test/jetty/jetty.xml,${project.basedir}/src/test/jetty/jetty-ssl.xml,${project.basedir}/src/test/jetty/jetty-http.xml,${project.basedir}/src/test/jetty/jetty-https.xml</jettyXml>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
